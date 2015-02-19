@@ -1,22 +1,22 @@
 /** @jsx React.DOM */
 
 var React       = require('react');
-var NoteActions = require('../actions/note_actions.js');
-var NoteStore   = require('../actions/note_store.js');
 
-var NoteFormTextarea = require('../actions/note_form_textarea.js');
+var NoteFormTextarea = require('./note_form_textarea.jsx');
+
+var NoteActions = require('../actions/note_actions.js');
+var NoteStore   = require('../stores/note_store.js');
 
 var NoteForm = React.createClass({
-
-
 
   handleSave: function(noteContent, id) {
     if(id) {
 
       NoteActions.editNote({
-        id: _id,
+        _id: id,
         text: noteContent
       });
+
     } else {
 
       NoteActions.createNote({
@@ -25,17 +25,6 @@ var NoteForm = React.createClass({
       })
     }
   },
-
-  componentWillReceiveProps: function(nextProps) {
-
-    this.setState({
-      noteContent: noteProps.noteContent
-    });
-
-    if(!nextProps.id) {
-      this.refs.noteContent.getDOMNode().focus();
-    }
-  }
 
   render: function() {
     var note;
@@ -46,14 +35,10 @@ var NoteForm = React.createClass({
 
     return (
       <div className="test2">
-        <textarea ref="noteContent" cols="10" value={ this.stateNoContent } onChange={ this.handleChange }></textarea>
-
-        <input type="submit" className="button" value="Create Post" onClick={ this.handleSave } />
+        <NoteFormTextarea onSave={ this.handleSave } id={ this.props.id } noteText={ note ? note.text : '' } />
       </div>
     );
   }
-
 });
-
 
 module.exports = NoteForm;

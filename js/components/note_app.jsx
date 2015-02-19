@@ -9,20 +9,26 @@ var NoteApp = React.createClass({
   getInitialState: function() {
     return {
       id: null
-    };
+    }
   },
 
-  onNoteEdit: function(id) {
+  onEdit: function(id) {
     this.setState({
       currentylEdited: id
     });
   },
 
-  onNoteAdd: function() {
+  onAdd: function() {
+    this.setState({
+      currentylEdited: null
+    });
+  },
+
+  render: function() {
     return(
       <div className="test">
-        <NoteBox, onNoteEdit={ this.onNoteEdit } onNoteAdd={ this.onNoteAdd } />
-        <NoteForm, id={ this.state.currentylEdited } />
+        <NoteBox onEdit={ this.onEdit } onAdd={ this.onAdd } />
+        <NoteForm id={ this.state.currentylEdited } />
       </div>
     )
   }

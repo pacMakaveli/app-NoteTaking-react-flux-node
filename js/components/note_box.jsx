@@ -1,14 +1,15 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var NoteList = require('./note_list.jsx');
 
-var NoteStore = require('../stores/note_store');
+var NoteList = require('./note_list.jsx');
+var NoteStore = require('../stores/note_store.js');
 
 var NoteBox = React.createClass({
+
   getInitialState: function() {
     return {
-      notes: NoteStore.getNotes();
+      notes: NoteStore.getNotes()
     };
   },
 
@@ -40,7 +41,7 @@ var NoteBox = React.createClass({
           <a href="" onClick={ this.onAdd }>New Note</a>
         </div>
 
-        <NoteList ref="noteList" notes={ this.state.nodes } onEdit={ this.props.edit }
+        <NoteList ref="noteList" notes={ this.state.nodes } onEdit={ this.props.edit } />
       </div>
     );
   }
